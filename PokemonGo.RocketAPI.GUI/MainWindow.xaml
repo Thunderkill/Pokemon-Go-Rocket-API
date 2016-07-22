@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PokemonGo.RocketAPI.GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PokemonGo RocketAPI Bot" Height="350" Width="525">
     <Grid>
-        
+        <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="432,289,0,0" VerticalAlignment="Top" Width="75" Click="startButton_Click"/>
+        <Label x:Name="UsernameLabel" Content="Pihkakulli" HorizontalAlignment="Left" Margin="379,26,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="XPLabel" Content="150,000 - 250,000" HorizontalAlignment="Left" Margin="369,57,0,0" VerticalAlignment="Top"/>
+        <GroupBox x:Name="groupBox" Header="Stats" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="157" Width="191">
+            <Grid Margin="0,-5,-2,-2" Height="142" VerticalAlignment="Top" HorizontalAlignment="Left" Width="181">
+                <Label x:Name="PokeLabel" Content="Pokemons Caught" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                <Label x:Name="StopLabel" Content="Stops visited" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0"/>
+                <Label x:Name="PokeValueLabel" Content="0" HorizontalAlignment="Left" Margin="154,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="StopValueLabel" Content="0" HorizontalAlignment="Left" Margin="154,36,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label" Content="Pokemons evolved" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="EvolveValueLabel" Content="0" HorizontalAlignment="Left" Margin="154,62,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1" Content="Pokemons transfered" HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,0.52"/>
+                <Label x:Name="TransferValueLabel" Content="0" HorizontalAlignment="Left" Margin="154,88,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2" Content="Perfects caught" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.478,0.528"/>
+                <Label x:Name="PerfectValueLabel" Content="0" HorizontalAlignment="Left" Margin="154,114,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+
+
     </Grid>
 </Window>

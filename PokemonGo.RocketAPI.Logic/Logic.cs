@@ -276,7 +276,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (playerStat != null)
             {
                 var message = $"{profile.Profile.Username} lvl {playerStat.Level:0} - ({(playerStat.Experience):0} / {(playerStat.NextLevelXp):0})";
-                System.Console.Title = message;
+                //System.Console.Title = message;
                 Logger.Write(message);
             }
             await Task.Delay(5000);
