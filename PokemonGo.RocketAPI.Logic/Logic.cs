@@ -270,11 +270,12 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task DisplayPlayerLevelInTitle()
         {
+            var profile = await _client.GetProfile();
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
             {
-                var message = $"Player level {playerStat.Level:0} - ({(playerStat.Experience - playerStat.PrevLevelXp):0} / {(playerStat.NextLevelXp - playerStat.PrevLevelXp):0})";
+                var message = $"{profile.Profile.Username} lvl{playerStat.Level:0} - ({(playerStat.Experience - playerStat.PrevLevelXp):0} / {(playerStat.NextLevelXp - playerStat.PrevLevelXp):0})";
                 System.Console.Title = message;
                 Logger.Write(message);
             }
