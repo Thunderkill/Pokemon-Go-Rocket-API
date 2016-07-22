@@ -16,6 +16,7 @@ namespace PokemonGo.RocketAPI
         float KeepMinIVPercentage { get; }
         int KeepMinCP { get; }
         double WalkingSpeedInKilometerPerHour { get; }
+        bool AllowTeleporting { get; }
 
         ICollection<KeyValuePair<AllEnum.ItemId, int>> ItemRecycleFilter { get; }
 

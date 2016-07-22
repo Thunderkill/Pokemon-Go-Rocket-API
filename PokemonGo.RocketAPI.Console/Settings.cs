@@ -20,6 +20,7 @@ namespace PokemonGo.RocketAPI.Console
         public float KeepMinIVPercentage => UserSettings.Default.KeepMinIVPercentage;
         public int KeepMinCP => UserSettings.Default.KeepMinCP;
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
+        public bool AllowTeleporting => UserSettings.Default.AllowTeleporting;
 
         public string GoogleRefreshToken
         {

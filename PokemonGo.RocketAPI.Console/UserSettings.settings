@@ -6,7 +6,7 @@
       <Value Profile="(Default)">Google</Value>
     </Setting>
     <Setting Name="PtcUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">username2</Value>
+      <Value Profile="(Default)">username</Value>
     </Setting>
     <Setting Name="PtcPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">pw</Value>
@@ -31,6 +31,9 @@
     </Setting>
     <Setting Name="WalkingSpeedInKilometerPerHour" Type="System.Double" Scope="User">
       <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="AllowTeleporting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
