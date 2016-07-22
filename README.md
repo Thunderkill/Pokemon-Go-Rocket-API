@@ -27,6 +27,10 @@ Todo
 
 ```
 GUI (In progress)
+Incubator support
+Lucky egg
+Incense support
+Capture pokemons from incense/lures
 walk while catching pokemons
 web panel?
 ```
