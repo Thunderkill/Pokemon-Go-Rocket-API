@@ -5,8 +5,8 @@ This is a bot continuation of FeroxRev's bot
 Usage
 
 ```
-Change settings in *app.config* (in visual studio) or *PokemonGo.RocketAPI.Console.exe.config* in executable path
-Launch *PokemonGo.RocketAPI.Console.exe*
+Change settings in 'app.config' (in visual studio) or 'PokemonGo.RocketAPI.Console.exe.config' in executable path
+Launch 'PokemonGo.RocketAPI.Console.exe'
 Profit
 ```
 
