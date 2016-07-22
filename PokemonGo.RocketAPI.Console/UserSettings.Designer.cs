@@ -37,7 +37,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("username")]
+        [global::System.Configuration.DefaultSettingValueAttribute("username2")]
         public string PtcUsername {
             get {
                 return ((string)(this["PtcUsername"]));
@@ -104,6 +104,42 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["DefaultAltitude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("85")]
+        public float KeepMinIVPercentage {
+            get {
+                return ((float)(this["KeepMinIVPercentage"]));
+            }
+            set {
+                this["KeepMinIVPercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int KeepMinCP {
+            get {
+                return ((int)(this["KeepMinCP"]));
+            }
+            set {
+                this["KeepMinCP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public double WalkingSpeedInKilometerPerHour {
+            get {
+                return ((double)(this["WalkingSpeedInKilometerPerHour"]));
+            }
+            set {
+                this["WalkingSpeedInKilometerPerHour"] = value;
             }
         }
     }

@@ -37,8 +37,17 @@ namespace PokemonGo.RocketAPI.Logic
             return
                 templates.ItemTemplates.Select(i => i.PokemonSettings)
                     .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
-        } 
+        }
 
+        public async Task<int> GetHighestCPofType(PokemonData pokemon)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
+                            .OrderByDescending(x => x.Cp)
+                            .First().Cp;
+
+        }
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(bool keepPokemonsThatCanEvolve = false)
         {
@@ -84,10 +93,15 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
 
-        public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve()
+        public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
-            var pokemons = myPokemons.Where(p => p.DeployedFortId == 0).ToList(); //Don't evolve pokemon in gyms
+            myPokemons = myPokemons.Where(p => p.DeployedFortId == 0).OrderBy(p => p.Cp); //Don't evolve pokemon in gyms
+            if(filter != null)
+            {
+                myPokemons = myPokemons.Where(p => filter.Contains(p.PokemonId));
+            }
+            var pokemons = myPokemons.ToList();
 
             var myPokemonSettings = await GetPokemonSettings();
             var pokemonSettings = myPokemonSettings.ToList();
@@ -112,8 +126,14 @@ namespace PokemonGo.RocketAPI.Logic
 
             return pokemonToEvolve;
         }
-        
 
+        public async Task<IEnumerable<PlayerStats>> GetPlayerStats()
+        {
+            var inventory = await _client.GetInventory();
+            return inventory.InventoryDelta.InventoryItems
+                .Select(i => i.InventoryItemData?.PlayerStats)
+                .Where(p => p != null);
+        }
 
         public async Task<IEnumerable<Item>> GetItems()
         {
@@ -134,8 +154,8 @@ namespace PokemonGo.RocketAPI.Logic
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.itemRecycleFilter.Any(f => f.Key == ((ItemId)x.Item_) && x.Count > f.Value))
-                .Select(x => new Item { Item_ = x.Item_, Count = x.Count - settings.itemRecycleFilter.Single(f => f.Key == (AllEnum.ItemId)x.Item_).Value, Unseen = x.Unseen });
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == ((ItemId)x.Item_) && x.Count > f.Value))
+                .Select(x => new Item { Item_ = x.Item_, Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (AllEnum.ItemId)x.Item_).Value, Unseen = x.Unseen });
         }
     }
 }

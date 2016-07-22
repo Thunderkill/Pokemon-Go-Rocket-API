@@ -11,14 +11,27 @@ namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
-        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType);
+        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
-        public double DefaultAltitude => UserSettings.Default.DefaultLongitude;
+        public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
+        public float KeepMinIVPercentage => UserSettings.Default.KeepMinIVPercentage;
+        public int KeepMinCP => UserSettings.Default.KeepMinCP;
+        public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
 
-        ICollection<KeyValuePair<ItemId, int>> ISettings.itemRecycleFilter
+        public string GoogleRefreshToken
+        {
+            get { return UserSettings.Default.GoogleRefreshToken; }
+            set
+            {
+                UserSettings.Default.GoogleRefreshToken = value;
+                UserSettings.Default.Save();
+            }
+        }
+
+        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {
             get
             {
@@ -51,7 +64,7 @@ namespace PokemonGo.RocketAPI.Console
                      new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
                      new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
 
-                     new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 20),
+                     new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 200),
                      new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
                      new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
                      new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
@@ -64,20 +77,53 @@ namespace PokemonGo.RocketAPI.Console
                      new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100),
                 };
             }
-
-            set
-            {
-                throw new NotImplementedException();
             }
-        }
 
-        public string GoogleRefreshToken
-        {
-            get { return UserSettings.Default.GoogleRefreshToken; }
-            set
+        public ICollection<PokemonId> PokemonsToEvolve
             {
-                UserSettings.Default.GoogleRefreshToken = value;
-                UserSettings.Default.Save();
+            get
+        {
+                //Type of pokemons to evolve
+                return new[]
+            {
+                    PokemonId.Rattata,
+                    PokemonId.Spearow,
+                    PokemonId.Ekans,
+                    PokemonId.Pikachu,
+                    PokemonId.Sandshrew,
+                    PokemonId.Clefable,
+                    PokemonId.Vulpix,
+                    PokemonId.Jigglypuff,
+                    PokemonId.Zubat,
+                    PokemonId.Paras,
+                    PokemonId.Venonat,
+                    PokemonId.Diglett,
+                    PokemonId.Meowth,
+                    PokemonId.Psyduck,
+                    PokemonId.Mankey,
+                    PokemonId.Growlithe,
+                    PokemonId.Tentacool,
+                    PokemonId.Ponyta,
+                    PokemonId.Slowpoke,
+                    PokemonId.Magnemite,
+                    PokemonId.Doduo,
+                    PokemonId.Seel,
+                    PokemonId.Grimer,
+                    PokemonId.Shellder,
+                    PokemonId.Drowzee,
+                    PokemonId.Krabby,
+                    PokemonId.Voltorb,
+                    PokemonId.Exeggcute,
+                    PokemonId.Cubone,
+                    PokemonId.Koffing,
+                    PokemonId.Rhyhorn,
+                    PokemonId.Horsea,
+                    PokemonId.Goldeen,
+                    PokemonId.Staryu,
+                    PokemonId.Omanyte,
+                    PokemonId.Kabuto,
+                    PokemonId.Dratini
+                };
             }
         }
     }

@@ -15,7 +15,7 @@ namespace PokemonGo.RocketAPI
 {
     public class Client
     {
-        private readonly ISettings _settings;
+        public ISettings Settings { get; }
         private readonly HttpClient _httpClient;
         private AuthType _authType = AuthType.Google;
         public string AccessToken { get; set; }
@@ -28,8 +28,8 @@ namespace PokemonGo.RocketAPI
 
         public Client(ISettings settings)
         {
-            _settings = settings;
-            SetCoordinates(_settings.DefaultLatitude, _settings.DefaultLongitude, _settings.DefaultAltitude);
+            Settings = settings;
+            SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
 
             //Setup HttpClient and create default headers
             HttpClientHandler handler = new HttpClientHandler()
@@ -57,19 +57,22 @@ namespace PokemonGo.RocketAPI
         public async Task DoGoogleLogin()
         {
             _authType = AuthType.Google;
-            if (_settings.GoogleRefreshToken != string.Empty)
+
+            GoogleLogin.TokenResponseModel tokenResponse = null;
+            if (Settings.GoogleRefreshToken != string.Empty)
             {
-                var tokenResponse = await GoogleLogin.GetAccessToken(_settings.GoogleRefreshToken);
-                AccessToken = tokenResponse.id_token;
+                tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
+                AccessToken = tokenResponse?.id_token;
             }
             
             if (AccessToken == null)
             {
                 var deviceCode = await GoogleLogin.GetDeviceCode();
-                var tokenResponse = await GoogleLogin.GetAccessToken(deviceCode);
-                AccessToken = tokenResponse.id_token;
-                _settings.GoogleRefreshToken = tokenResponse.access_token;
+                tokenResponse = await GoogleLogin.GetAccessToken(deviceCode);
+                Settings.GoogleRefreshToken = tokenResponse?.refresh_token;
+                AccessToken = tokenResponse?.id_token;
             }
+            
         }
 
         /// <summary>
